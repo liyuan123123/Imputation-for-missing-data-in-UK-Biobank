@@ -1,0 +1,8 @@
+The aim of this project is to impute missing data from UK Biobank.
+This project assumes that the raw UK Biobank data is in CSV format, and the tools used are Jupyter Notebook and Rstudio. (python 3.8.8 and R3.6.1)
+The whole process is divided into five steps:
+Step1: File splitting. Using file spliting.exe to split the raw UK Biobank file into serveral subfile (just fill in 10000 in the option box)
+Step2: Running 'Generate categories.ipynb' to divide UK Biobank into serveral tasks. 
+Step3: Running 'Data cleaning.ipynb' to perform data cleaning to data in these tasks, and generate files to be imputed.
+Step4: Running 'Imputation.R' to generate imputed files
+Step5: Running 'Composite score and final version.ipynb' to calculate composite scores, and generate the final imputed file. Some tasks have two imputed files. One is the file that contains all the variables under the task, and the other is the file that just contains important variables under the task

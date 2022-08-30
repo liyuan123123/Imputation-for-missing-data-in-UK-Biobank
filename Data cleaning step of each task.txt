@@ -1,0 +1,210 @@
+Anthropometry:
+1.Impute the variable with the value which more than 90% of the values are the same
+2.Fill in the missing values measured automatically with those measured manually
+
+Arterial stiffness:
+1.Impute the variable with the value which more than 90% of the values are the same
+
+Blood and Urine:
+1.Impute the variable with the value which more than 90% of the values are the same
+
+Bone-destiny of heel
+1.Fill in the missing values measured automatically with those measured manually
+2.Merge the data of the left and right feet
+
+Carotid Ultrasound:
+1.Impute the variable with the value which more than 90% of the values are the same
+
+Cognitive:
+Trail making:
+(1)Fill with 0 in ‘Errors before selecting correct item’ where ‘Interval between previous point and current one’ 
+     has value but ‘Errors before selecting correct item’ is missing.
+(2)Replace the invalid time record marked -1 in ‘Interval between previous point and current one’ with null
+(3)Clear out the ‘Total’ or ‘Duration’  who anandoned or timed-out.
+(4)Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+(5)Fill the empty values in ‘Total errors’ and ‘Duration’ with the sum of ‘Errors’ and ‘Interval’
+(6)Fill in the timed-out with 300
+Symbol digit test:
+(1)Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+(2)Clear ‘Number of symbol digit matches made correctly-0.0’and  'Number of symbol digit matches attempted-0.0', 
+    whose state is abandoned, but has records
+Fluid Intelligence/reasoning:
+(1)Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+(2)Clear ‘Fluid Intelligence score’, whose state is abandoned, but has records
+Pair matching test:
+(1)Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+(2)Clear the variable, whose state is abandoned, but has records
+(3)Add a column to record the level of play completed by the participant(3,6,8)
+Before imputed the data with MICE,we should drop 3 types of varibales which will effect the result of MICE :
+(1)Variables which more than 90% of the value is same
+(2)The type of value is not int
+(3)The type of value is int but the numerical size of which does not represent cognitive ability(such as status)
+(4)pilot data
+(5)If a variable is high correlated(r>0.95) with other variables, only one variable will be selected
+
+digestive health:
+1.replace values which =-500、-501、-502、-503、-504、-600、-601、-602、-801、-802 with 0,1,2,3,4,0,1,2,1,2
+2.replace values which <0 with null
+3.If the value of first level is never or no,the values of the next question are 0
+4.Impute the variable with the value which more than 90% of the values are the same
+
+ECG at rest：
+1.Impute the variable with the value which more than 90% of the values are the same
+
+ECG during exercise：
+1.Impute the variable with the value which more than 90% of the values are the same
+
+Eyesight：
+Autorefraction
+1.Delete the result of refraction which marked unreliable
+2.Impute the variable with the value which more than 90% of the values are the same
+Visual acuity
+1.Impute the variable with the value which more than 90% of the values are the same
+
+Female-specific factors：
+1.replace the variable Years since last cervical smear test's value from -10 to 0.5 which means Less than a year ago
+2.replace the variable Had menopause's value from 3 to np.nan which means not sure
+3.replace the variable:Age when last used oral contraceptive pill's value from -11 to the real age which means still taking the pill
+4.If the answer of Ever taken oral contraceptive pill is no,the answer of Age started oral contraceptive pill and Age last oral contraceptive pill will be imputed with 0
+5.If the answer of Ever had stillbirth, spontaneous miscarriage or termination is no,the answer of Number of pregnancy terminations and Number of spontaneous miscarriages and Number of stillbirths will be imputed with 0
+6.If the answer of Number of live births is no,the answer of Age of primiparous women at birth of child and Age at first live birth and Age at last live birth and Birth weight of first child will be imputed with 0
+7.If the answer of Had menopause is 1 or 2(means had a hysterectomy or Had menopause),the answer of Menstruating today and Length of menstrual cycle will be replaced by 0
+8.If the answer of Had menopause is 2(means had a hysterectomy),the answer of Ever had hysterectomy (womb removed) will be replaced by 1
+9.replace the answer of Had menopause from 2 to np.nan
+10.If the answer of Ever used hormone-replacement therapy (HRT) is 0,the answer of Age started hormone-replacement therapy (HRT) will be replaced by 0
+11.If the answer of Bilateral oophorectomy (both ovaries removed) is 0, the answer of Age at bilateral oophorectomy (both ovaries removed) will be replaced by 0
+12.replace the answer of Delivery onset methods from 9(which means not know) to np.nan
+13.replace the answer of Delivery onset methods with one-hot value
+14.replace the answer of Age at first live birth which is null with thw answer of Age of primiparous women at birth of child
+15.replace the answer of Age at last live birth which is null with thw answer of Age of primiparous women at birth of child
+16.delete some variables without important
+17.replace values which <0 with null
+
+Food-24 hours：
+Only the category of Estimated nutrients and Physical activity yesterday is extracted
+
+Hearing：
+1.Clears test results for people whose completion status is error
+2.Clear the left ear test results from people who can't hear or hear only from the right ear  
+3.Clear the right ear test results from people who can't hear or hear only from the left ear
+4.Impute the variable with the value which more than 90% of the values are the same
+
+Lifestyle：
+Sexual factors
+1.Change the value of 'Lifetime number of sexual partners', 'Age first had sexual intercourse-0.0' with 0,80 whose value of 'Age first had sexual intercourse-0.0' is -2 (which means Never had sex)
+2.Change the value of 'Lifetime number of same-sex sexual partners-0.0' with 0 whose value of 'Ever had same-sex intercourse-0.0' is no
+Sun exposure
+1.Change the value of 'Time spend outdoors in summer-0.0','Time spend outdoors in winter-0.0' from -10 (which means Less than an hour a day) to 0.5 
+Alcohol
+1.Each person recorded either weekly or monthly alcohol consumption, so we will Divide the amount of alcohol consumed per month by 4.3 and merge that with weekly alcohol consumption
+2.If the value of 'Alcohol intake frequency' means this person will drink, the value of 'Former alcohol drinker-0.0' will be imputed by 1 because this variable only record the person who won't drink now.
+Diet
+1.Change the value from -10 (which means Less than one a day) to 0.5 
+2.Divide variable 'Never eat eggs, dairy, wheat, sugar' into each kinds of food
+3.If the value of 'Dairy products' is no, the value of 'Cheese intake' is 0
+4.Merge the value 'Spread type' and 'Non-butter spread type details'
+Smoking
+1.If the value of 'Smoking status' is 0(which means never smoke), the value of 'Current tobacco smoking' is 0
+Electronic device use
+1.If the value of 'Length of mobile phone use' is 0(which means Never used mobile phone at least once per week), the value of 'Difference in mobile phone use compared to two years previously-0.0' and 'Weekly usage of mobile phone in last 3 months' will be imputed by 0
+Physical activity
+1.Divide variable 'Types of physical activity in last 4 weeks' into each kinds of activity
+2.If the value of 'Walking for pleasure' is 0 the value of 'Duration/Frequency walking for pleasure' will be imputed by 0
+3.If the value of 'Light DIY' is 0 the value of 'Duration/Frequency of light DIY' will be imputed by 0
+4.If the value of 'Heavy DIY' is 0 the value of 'Duration/Frequency of heavy DIY' will be imputed by 0
+5.If the value of 'Strenuous sports' is 0 the value of 'Duration/Frequency of strenuous sports' will be imputed by 0
+6.If the value of 'Other exercises' is 0 the value of 'Duration/Frequency of Other exercises' will be imputed by 0
+7.If the value of 'Number of days/week of moderate physical activity 10+ minutes-0.0' is 0 the value of 'Duration of moderate activity' will be imputed by 0
+8.If the value of 'Number of days/week of vigorous physical activity 10+ minutes' is 0 the value of 'Duration of vigorous activity' will be imputed by 0
+9.Change the value of 'Time spent driving','Time spent using computer','Time spent watching television (TV)' from -10 (which means Less than an hour a day) to 0.5 
+10.Divide variable 'Types of transport used (excluding work)' into each kinds of transport
+
+Male-specific factors:
+1.replace values which <0 （means do not know or prefer not to answer）with null
+
+Mental health web-based questionnaire：
+Addictions:
+1.replace values which <0 with null
+2.If the answer of Ever addicted to any substance or behaviour is no,the answer of Ever addicted to alcohol,Ever addicted to a behaviour or miscellanous and Ever addicted to illicit or recreational drugs will be imputed with 0
+3.If the answer of Ever addicted to alcohol is no,the answer of Ever physically dependent on alcohol and Ongoing addiction to alcohol will be imputed with 0
+4.If the answer of Ever addicted to a behaviour or miscellanous is no,the answer of Ongoing behavioural or miscellanous addiction will be imputed with 0
+5.Create a new column to represent the number of Substance of prescription or over-the-counter medication addiction
+6.If the answer of Ever addicted to illicit or recreational drugs is no,the answer of Ongoing addiction or dependence on illicit or recreational drugs and the number of Substance of prescription or over-the-counter medication addiction will be imputed with 0
+7.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Alcohol use:
+1.replace values which <0 with null
+2.If the frequence of drinking alcohol is never,the answers of the next problem are 0
+3.If the frequence of Ever had known person concerned about, or recommend reduction of, alcohol consumption is never,the answers of the next problem are 0
+4.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Anxiety:
+1.If the answer of Longest period spent worried or anxious is -999,it will be replaced by 1000
+2.Creating two new columns to record the number of activities and substances
+3.replace values which <0 with null
+4.If the Ever felt worried is never,the answers of longest period  spent worried or anxious is 0
+5.If the answer of Longest period spent worried or anxious and Ever felt worried is never is 0, imputed the next level’s answer with 0
+6.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+cannabis use:
+1.replace values which <0 with null
+2.If the Ever taken cannabis is never,the answers of Maximum frequency is 0,and the answer of Age when last took cannabis is 0
+3.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Depression:
+1.Creating two new columns to record the number of activities and substances
+2.replace values which <0 with null
+3.If the answer of Ever had prolonged loss of interest in normal activities and Ever had prolonged feelings of sadness or depression is 0, imputed the next level’s answer with 0
+4.If the answer of Did your sleep change? is 0, the answer of next level is 0
+5.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Happiness and subjective well-being:
+1.replace values which <0 with null
+Mania:
+1.replace values which <0 with null
+2.Create a new column to record the number of Manifestations of mania or irritability
+3.If the Ever had period of mania / excitability and Ever had period extreme irritability is no,the answers of the next level is 0
+4.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Mental distress:
+1.replace values which <0 with null
+2.Create a new column to record the number of mental health problems ever diagnosed by a professional
+3.If the answer of Ever sought or received professional help for mental distress and Ever suffered mental distress preventing usual activities is no,and the number of mental health problems is null,replace it with 0
+Self-harm behavoiurs:
+1.replace values which <0 with null
+2.Change Actions taken following self-harm with whether regret after suicide
+3.If the answer of Ever self-harmed,Ever attempted suicide,Ever contemplated self-harm is no,the answers of the next level is 0
+4.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Traumatic events:
+1.replace values which <0 with null
+2.If the answer of Avoided activities or situations because of previous stressful experience in past month,Repeated disturbing thoughts of stressful experience in past month and Felt very upset when reminded of stressful experience in past month is no,the answers of the next level is 0
+3.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+Unusual and psychotic experiences:
+1.replace values which <0 with null
+2.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+
+Mental health-assessment center questionnaire：
+1.replace the answer of Illness, injury, bereavement, stress in last 2 years is -7 with 0
+2.replace values which <0 with null
+3.Create a new column to record the number of symptoms
+4.If the answer of the first level is no,the answers of the next level is 0
+5.Create a new column to record the number of Illness,injury and so on
+6.Impute the variable with the value which more than 90% of the values are the same(These cannot be imputed by MICE)
+
+Sociodemographics：
+Education
+1.Change the value of -2 in variable Age completed full time education(which means never went school) to 80
+2.Divide variable Qualifications into Degree level(record the level of education back ground), Number of vocational certificate and If had other professional qualifications eg: nursing, teaching
+3.If the value of degree level is 3(which means College or University degree, the value of Age completed full time education will be replaced with 21)
+Ethnicity
+1.Change the value of Age of immigrated to UK (United Kingdom) into 0 who was born in UK
+2.Change the value of Ethnic background into first level
+Other sociodemographic factors
+1.Divide Attendance/disability/mobility allowance into each kind of allowance
+Employment
+1.Adjust the value of Current employment status with Current employment status - corrected
+2.Divide Current employment status into each kind of status
+3.If the value of In paid employment or self-employed is no, the value of Length of working week for main job is 0
+Household
+1.If the value of Type of accommodation lived in is Sheltered accommodation or Care home,the value of 'Number in household'、'Number of vehicles in household' and 'Average total household income before tax' will be replaced by 0
+replace values which <0 with null
+Impute the variable with the value which more than 90% of the values are the same
+
+Spirometry:
+1.Impute the variable with the value which more than 90% of the values are the same
+2.Delete unacceptable results
+3.Delete values who Smoked cigarette or pipe within last hour or Used an inhaler for chest within last hour or Smoked cigarette or pipe within last hour
